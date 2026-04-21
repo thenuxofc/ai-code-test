@@ -1,99 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Thenux AI</title>
-  <style>
-    body {
-      background-image: url('https://i.ibb.co/ymjSDxCv/image.jpg');
-      background-size: cover;
-      background-position: center;
-      height: 100vh;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-family: Arial, sans-serif;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thenux AI</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('https://i.ibb.co/ymjSDxCv/image.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+        }
 
-    .landing {
-      position: relative;
-      width: 80%;
-      height: 80%;
-      background-color: rgba(255, 255, 255, 0.5);
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      animation: fadeIn 2s;
-    }
+        .container {
+            max-width: 800px;
+            width: 100%;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
 
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-      }
-      to {
-        opacity: 1;
-      }
-    }
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-    .navbar {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      background-color: #333;
-      padding: 10px;
-      border-radius: 10px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      animation: slideIn 2s;
-    }
+        .navbar ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
 
-    @keyframes slideIn {
-      from {
-        transform: translateX(-100%);
-      }
-      to {
-        transform: translateX(0);
-      }
-    }
+        .navbar li {
+            margin-right: 20px;
+        }
 
-    .navbar ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: flex;
-    }
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+        }
 
-    .navbar li {
-      margin-right: 20px;
-    }
+        .navbar a:hover {
+            color: #ccc;
+        }
 
-    .navbar a {
-      color: #fff;
-      text-decoration: none;
-    }
+        .navbar button {
+            background-color: #333;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
 
-    .navbar a:hover {
-      color: #ccc;
-    }
-  </style>
+        .navbar button:hover {
+            background-color: #444;
+        }
+
+        .liquid-button {
+            position: relative;
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #333;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .liquid-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background-color: #444;
+            transition: width 0.5s ease-in-out;
+        }
+
+        .liquid-button:hover::before {
+            width: 100%;
+        }
+
+        .liquid-button::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 10px 10px 0 10px;
+            border-color: #444 transparent transparent transparent;
+            transition: width 0.5s ease-in-out;
+        }
+
+        .liquid-button:hover::after {
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 0 10px 10px 10px;
+            border-color: transparent transparent #444 transparent;
+        }
+    </style>
 </head>
 <body>
-  <nav class="navbar">
-    <ul>
-      <li><a href="#">Home</a></li>
-      <li><a href="#">About</a></li>
-      <li><a href="#">Contact</a></li>
-    </ul>
-  </nav>
-  <div class="landing">
-    <h1>Welcome to Thenux AI</h1>
-    <p>This is a simple landing page with a navbar menu.</p>
-  </div>
+    <div class="navbar">
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+        <button>Learn More</button>
+    </div>
+    <div class="container">
+        <h1>Thenux AI</h1>
+        <p>Welcome to Thenux AI, your premium dev partner.</p>
+        <button class="liquid-button">Get Started</button>
+    </div>
+    <script>
+        // Add animation to navbar
+        const navbar = document.querySelector('.navbar');
+        navbar.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navbar.classList.add('fixed');
+            } else {
+                navbar.classList.remove('fixed');
+            }
+        });
+
+        // Add animation to liquid button
+        const liquidButton = document.querySelector('.liquid-button');
+        liquidButton.addEventListener('mouseover', () => {
+            liquidButton.classList.add('animate');
+        });
+        liquidButton.addEventListener('mouseout', () => {
+            liquidButton.classList.remove('animate');
+        });
+    </script>
 </body>
 </html>
