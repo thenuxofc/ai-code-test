@@ -1,3 +1,5 @@
+/* styles.css */
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -7,60 +9,51 @@ body {
 header {
     background-color: #333;
     color: #fff;
-    padding: 1em;
+    padding: 20px;
     text-align: center;
 }
 
-nav ul {
+header nav ul {
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
-nav li {
+header nav ul li {
     display: inline-block;
     margin-right: 20px;
 }
 
-nav a {
+header nav a {
     color: #fff;
     text-decoration: none;
 }
 
-nav a:hover {
-    color: #ccc;
-}
-
 .hero {
-    background-image: url("hero.jpg");
+    background-image: url('hero-image.jpg');
     background-size: cover;
     background-position: center;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #fff;
 }
 
-.hero h1 {
-    font-size: 48px;
+.hero-content {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    text-align: center;
 }
 
-.hero p {
-    font-size: 24px;
+.hero-image {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
 }
 
-button {
-    background-color: #333;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    font-size: 18px;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #444;
+.features {
+    padding: 20px;
 }
 
 .features ul {
@@ -73,51 +66,66 @@ button:hover {
     margin-bottom: 20px;
 }
 
-.features i {
-    font-size: 24px;
-    margin-right: 10px;
+.features h3 {
+    margin-top: 0;
 }
 
-.features h3 {
-    font-size: 24px;
+.testimonials {
+    padding: 20px;
+}
+
+.testimonials ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.testimonials li {
+    margin-bottom: 20px;
+}
+
+.testimonials p {
     margin-bottom: 10px;
 }
 
-.features p {
-    font-size: 18px;
-}
-
-.contact {
+.call-to-action {
+    padding: 20px;
     background-color: #333;
     color: #fff;
-    padding: 1em;
-    text-align: center;
 }
 
-.contact form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.contact input, .contact textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
-    border: none;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.contact button {
+.call-to-action button {
     background-color: #333;
     color: #fff;
     border: none;
     padding: 10px 20px;
-    font-size: 18px;
+    font-size: 16px;
     cursor: pointer;
 }
 
-.contact button:hover {
+.call-to-action button:hover {
     background-color: #444;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+}
+
+footer ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+footer li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+footer a {
+    color: #fff;
+    text-decoration: none;
 }
