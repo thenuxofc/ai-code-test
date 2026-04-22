@@ -1,315 +1,313 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<title>✨ Premium Calculator ✨</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="UTF-8">
+<title>✨ T‑NEX ULTRAMODEL Calculator ✨</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
-/* ────────────────────── Global Styles ────────────────────── */
+/* ---------- Global & Background ---------- */
 :root {
-  --bg-grad-1: #1a1a2e;
-  --bg-grad-2: #16213e;
-  --primary: #00b894;
-  --primary-dark: #009377;
-  --text: #e0e0e0;
-  --shadow: rgba(0,0,0,0.3);
+  --bg-grad-1: #0f0c29;
+  --bg-grad-2: #302b63;
+  --card-bg: rgba(255,255,255,0.08);
+  --card-glow: 0 8px 32px rgba(0,0,0,0.5);
+  --accent: #6a11cb;
+  --accent-light: #a64ceb;
+  --text-primary: #e0e0e0;
+  --text-secondary: #b0b0c0;
 }
-* { box-sizing: border-box; margin:0; padding:0; }
-html,body { height:100%; font-family: 'Segoe UI',system-ui,sans-serif; }
-body {
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html, body {
+  height: 100%;
+  font-family: 'Segoe UI', Tahoma, Helvetica, Arial, sans-serif;
   background: linear-gradient(135deg, var(--bg-grad-1), var(--bg-grad-2));
-  display:flex; align-items:center; justify-content:center;
-  overflow:hidden;
+  overflow: hidden;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
 }
 
-/* ────────────────────── Calculator Container ────────────────────── */
-.calc {
-  width: 380px;
-  background: rgba(0,0,0,0.6);
-  border-radius: 24px;
-  padding: 24px;
-  box-shadow: 0 16px 32px 0 var(--shadow);
+/* ---------- Container ---------- */
+.container {
+  width: 100%;
+  max-width: 420px;
+  padding: 2rem;
+  background: var(--card-bg);
   backdrop-filter: blur(12px);
+  border-radius: 24px;
+  box-shadow: var(--card-glow);
   position: relative;
   overflow: hidden;
 }
 
-/* ────────────────────── Animated Gradient Background ────────────────────── */
-.calc::before {
-  content:"";
-  position:absolute;
-  inset:0;
-  background: radial-gradient(circle at 30% 30%, #2c3e50, transparent 40%);
-  animation: pulse 8s infinite;
+/* ---------- Header ---------- */
+.header {
+  text-align: center;
+  margin-bottom: 1.5rem;
 }
-@keyframes pulse {
-  0%,100% { opacity:0.15; }
-  50% { opacity:0.35; }
+.header h1 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  background: linear-gradient(90deg, var(--accent), var(--accent-light));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  letter-spacing: 1px;
 }
 
-/* ────────────────────── Display ────────────────────── */
+/* ---------- Input ---------- */
 .display {
-  background: rgba(255,255,255,0.08);
-  border-radius: 12px;
-  padding: 20px;
-  margin-bottom: 24px;
-  text-align:right;
-  font-size:2.2rem;
-  color:var(--text);
-  backdrop-filter:blur(6px);
-  min-height:70px;
-  display:flex; align-items:center; justify-content:flex-end;
-  overflow-x:auto;
+  width: 100%;
+  height: 70px;
+  margin-bottom: .8rem;
+  background: rgba(0,0,0,0.35);
+  border: none;
+  border-radius: 14px;
+  text-align: right;
+  font-size: 2rem;
+  font-weight: 300;
+  padding: 0 1rem;
+  color: var(--text-primary);
+  backdrop-filter: blur(8px);
 }
-.display span {
-  word-break:break-all;
+.display::placeholder {
+  color: var(--text-secondary);
 }
 
-/* ────────────────────── Buttons Grid ────────────────────── */
+/* ---------- Buttons Grid ---------- */
 .grid {
-  display:grid;
+  display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap:12px;
+  gap: .6rem;
 }
-button {
-  font-size:1.2rem;
-  padding:16px;
-  border:none;
-  border-radius:12px;
-  background: rgba(255,255,255,0.08);
-  color:var(--text);
-  cursor:pointer;
-  transition:background .2s, transform .1s;
-  backdrop-filter:blur(6px);
+.btn {
+  aspect-ratio: 1 / 1;
+  border: none;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.07);
+  color: var(--text-primary);
+  font-size: 1.4rem;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  transition: all .15s ease;
+  position: relative;
+  overflow: hidden;
 }
-button:active {
-  transform:scale(0.94);
+.btn:hover {
+  background: rgba(255,255,255,0.12);
+  transform: scale(1.05);
 }
-button.operator {
-  background: rgba(255,152,0,0.35);
-  color:#ff9f43;
+.btn:active {
+  transform: scale(0.95);
 }
-button.equal {
-  background: var(--primary);
-  color:#fff;
-  grid-column: span 2;
+.btn.operator {
+  background: linear-gradient(135deg, var(--accent), var(--accent-light));
+  color: #fff;
 }
-button.clear {
-  background: #ff4d4d;
-  color:#fff;
+.btn.operator:hover {
+  background: linear-gradient(135deg, #8a2be2, #d02090);
 }
 
-/* ────────────────────── Ripple Effect ────────────────────── */
+/* ---------- Ripple Effect ---------- */
 .ripple {
-  position:absolute;
-  border-radius:50%;
+  position: absolute;
+  border-radius: 50%;
   background: rgba(255,255,255,0.25);
-  transform:scale(0);
+  transform: scale(0);
   animation: ripple 400ms linear;
-  pointer-events:none;
+  pointer-events: none;
 }
 @keyframes ripple {
-  to { transform:scale(4); opacity:0; }
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
 }
 
-/* ────────────────────── Secret Unlocked Panel ────────────────────── */
+/* ---------- Secret Message ---------- */
 .secret {
-  position:absolute;
-  top:12px; right:12px;
-  width:30px;height:30px;
-  background: var(--primary);
-  border-radius:50%;
-  opacity:0;
-  transition:opacity .4s;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity .6s ease;
+  color: #fff;
+  font-size: 1.4rem;
+  text-align: center;
+  background: rgba(0,0,0,0.4);
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  pointer-events: none;
 }
-.secret.show { opacity:1; }
-.secret-inner {
-  position:absolute;
-  inset:0;
-  display:flex; align-items:center; justify-content:center;
-  font-size:.8rem;
-  color:#fff;
+.secret.show {
+  opacity: 1;
+}
+
+/* ---------- Footer ---------- */
+.footer {
+  margin-top: 2rem;
+  text-align: center;
+  font-size: .85rem;
+  color: var(--text-secondary);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 480px) {
+  .display { font-size: 1.6rem; }
+  .header h1 { font-size: 1.5rem; }
 }
 </style>
 </head>
 
 <body>
-<div class="calc">
-  <div class="display"><span id="display">0</span></div>
-
-  <!-- Secret unlock badge -->
-  <div class="secret" id="secretBadge"><span class="secret-inner">🔓</span></div>
-
-  <div class="grid">
-    <!-- Numbers -->
-    <button data-key="7">7</button>
-    <button data-key="8">8</button>
-    <button data-key="9">9</button>
-    <button data-key="/" class="operator">÷</button>
-
-    <button data-key="4">4</button>
-    <button data-key="5">5</button>
-    <button data-key="6">6</button>
-    <button data-key="*">×</button>
-
-    <button data-key="1">1</button>
-    <button data-key="2">2</button>
-    <button data-key="3">3</button>
-    <button data-key="-">−</button>
-
-    <button data-key="0">0</button>
-    <button data-key=".">.</button>
-    <button id="clear">C</button>
-    <button data-key="+">+</button>
+<div class="container">
+  <div class="header">
+    <h1>🔮 Calculator</h1>
   </div>
 
-  <button class="equal" id="enter">Enter</button>
+  <input type="text" class="display" id="display" readonly placeholder="0">
+
+  <div class="grid">
+    <!-- Row 1 -->
+    <button class="btn" data-key="clear">C</button>
+    <button class="btn" data-key="backspace">←</button>
+    <button class="btn" data-key="percent">%</button>
+    <button class="btn operator" data-key="/">÷</button>
+
+    <!-- Row 2 -->
+    <button class="btn" data-key="7">7</button>
+    <button class="btn" data-key="8">8</button>
+    <button class="btn" data-key="9">9</button>
+    <button class="btn operator" data-key="*">×</button>
+
+    <!-- Row 3 -->
+    <button class="btn" data-key="4">4</button>
+    <button class="btn" data-key="5">5</button>
+    <button class="btn" data-key="6">6</button>
+    <button class="btn operator" data-key="-">−</button>
+
+    <!-- Row 4 -->
+    <button class="btn" data-key="1">1</button>
+    <button class="btn" data-key="2">2</button>
+    <button class="btn" data-key="3">3</button>
+    <button class="btn operator" data-key="+">+</button>
+
+    <!-- Row 5 -->
+    <button class="btn" data-key="0">0</button>
+    <button class="btn" data-key=".">.</button>
+    <button class="btn" data-key="sqrt">√</button>
+    <button class="btn operator" data-key="=">=</button>
+  </div>
+
+  <!-- Secret overlay -->
+  <div class="secret" id="secretMessage">🎉 You found the hidden pattern! 🎉<br>Unlocked: <strong>T‑NEX ULTRAMODEL</strong></div>
+
+  <div class="footer">
+    <p>Built with ❤️ by <strong>T‑NEX ULTRAMODEL</strong></p>
+  </div>
 </div>
 
 <script>
-/* ────────────────────── Utility Helpers ────────────────────── */
+/* ---------- Utility ---------- */
 const $ = selector => document.querySelector(selector);
 const $$ = selector => Array.from(document.querySelectorAll(selector));
 
-/* ────────────────────── State ────────────────────── */
-let buffer = "0";           // current input value
-let lastInputWasOperator = false;
-let secretUnlocked = false;
+/* ---------- Display handling ---------- */
+const display = $('#display');
+let inputQueue = ''; // raw user input (including secret sequence)
 
-/* ────────────────────── UI References ────────────────────── */
-const display = $("#display");
-const secretBadge = $("#secretBadge");
-const buttons = $$("button[data-key]");
-const clearBtn = $("#clear");
-const enterBtn = $("#enter");
-
-/* ────────────────────── Core Logic ────────────────────── */
-function updateDisplay() {
-  display.textContent = buffer;
-}
-
-/* Add ripple at a given point */
-function addRipple(event) {
-  const btn = event.currentTarget;
-  const rect = btn.getBoundingClientRect();
-  const ripple = document.createElement("span");
-  ripple.className = "ripple";
-  ripple.style.left = `${event.clientX - rect.left}px`;
-  ripple.style.top  = `${event.clientY - rect.top}px`;
-  btn.appendChild(ripple);
-  // Remove after animation
+function append(key) {
+  // Show ripple on every key press
+  const ripple = document.createElement('span');
+  ripple.className = 'ripple';
+  ripple.style.left = `${event.clientX - display.getBoundingClientRect().left}px`;
+  ripple.style.top  = `${event.clientY - display.getBoundingClientRect().top}px`;
+  display.parentElement.appendChild(ripple);
   setTimeout(() => ripple.remove(), 400);
+
+  // Append to queue for secret detection
+  inputQueue += key;
+  // Trim to last 6 chars for easier checking
+  if (inputQueue.length > 6) inputQueue = inputQueue.slice(-6);
+  display.value = calculate(display.value, key);
 }
 
-/* Handle key / button press */
-function handlePress(key) {
-  // -------- Secret detection ----------
-  if (!secretUnlocked) {
-    // accumulate typed digits into a hidden string
-    const secretInput = $("#secretInput");
-    if (secretInput) {
-      secretInput.textContent += key;
-      if (secretInput.textContent === "535688") {
-        secretUnlocked = true;
-        secretBadge.classList.add("show");
-        // optional: flash the badge
-        secretBadge.style.animation = "pulse 1s infinite";
-      }
+/* ---------- Simple calculator logic ---------- */
+function calculate(prev, key) {
+  // Prevent multiple operators in a row
+  if (['+', '-', '*', '/', '%'].includes(key) && /[+\-*/%]$/.test(prev)) {
+    return prev.slice(0, -1) + key;
+  }
+  // Evaluate only when '=' is pressed
+  if (key === '=') {
+    try {
+      // Use Function constructor for safe eval (no external code injection)
+      return Function(`return ${prev}`)();
+    } catch {
+      return 'Error';
     }
   }
+  // Append digit / decimal
+  return prev === '0' && /[0-9.]/.test(key) ? key : prev + key;
+}
 
-  // -------- Normal calculator logic ----------
-  if (key === "Enter") {
-    // treat as “=”
-    evaluate();
-    return;
-  }
-  if (key === "C") { clearAll(); return; }
+/* ---------- Secret detection ---------- */
+const secretPattern = '535688';
+const secretEl = $('#secretMessage');
 
-  // Digits / decimal
-  if (!isNaN(key) || key === ".") {
-    if (lastInputWasOperator) { buffer = "0"; lastInputWasOperator = false; }
-    buffer = buffer === "0" && key !== "." ? key : buffer + key;
-    updateDisplay();
-    return;
-  }
-
-  // Operators
-  if (isNaN(key)) {
-    if (lastInputWasOperator) {
-      // replace the operator
-      buffer.slice(-1) === key.slice(0) || (buffer = buffer.slice(0,-1) + key);
-    } else {
-      // add operator after a number
-      if (buffer !== "" && buffer !== "0") {
-        buffer += " " + key + " ";
-        updateDisplay();
-      }
-      lastInputWasOperator = true;
-    }
+function checkSecret() {
+  if (inputQueue === secretPattern) {
+    secretEl.classList.add('show');
+    // Reset after a short delay so it can be found again later
+    setTimeout(() => secretEl.classList.remove('show'), 5000);
+    // Optional: you could trigger a special animation or sound here
   }
 }
 
-/* Evaluate simple RPN-like expression */
-function evaluate() {
-  // Simple evaluation: "3 + 4 * 2" → 14 (left‑to‑right)
-  const parts = buffer.split(" ");
-  if (parts.length < 3) return;
-  const a = parseFloat(parts[0]);
-  const op = parts[1];
-  const b = parseFloat(parts[2]);
-  if (isNaN(a) || isNaN(b)) return;
-  let result;
-  switch (op) {
-    case "+": result = a + b; break;
-    case "-": result = a - b; break;
-    case "×": result = a * b; break;
-    case "÷": result = b !== 0 ? a / b : "∞"; break;
-    default: return;
-  }
-  buffer = String(result);
-  updateDisplay();
-  lastInputWasOperator = true;
-}
-
-/* Clear everything */
-function clearAll() {
-  buffer = "0";
-  lastInputWasOperator = false;
-  updateDisplay();
-}
-
-/* ────────────────────── Event Listeners ────────────────────── */
-buttons.forEach(btn => {
-  btn.addEventListener("click", e => addRipple(e));
-  btn.addEventListener("click", e => handlePress(e.currentTarget.dataset.key));
+/* ---------- Button wiring ---------- */
+$$('button').forEach(btn => {
+  btn.addEventListener('click', e => {
+    const key = btn.dataset.key;
+    append(key);
+    checkSecret();
+  });
 });
 
-/* Keyboard support */
-window.addEventListener("keydown", e => {
+/* ---------- Keyboard support ---------- */
+document.addEventListener('keydown', e => {
   const key = e.key;
-  if (e.target.tagName === "INPUT") return; // ignore if typing in a field
-  handlePress(key);
+  if (/\d/.test(key)) append(key);
+  else if (key === '.' ) append('.');
+  else if (key === 'Enter') append('=');
+  else if (key === 'Backspace') append('backspace');
+  else if (key.toLowerCase() === 'c') append('clear');
+  else if (key === 'Escape') append('clear');
+  else if (['+', '-', '*', '/', '%'].includes(key)) append(key);
+  else if (key === '(' || key === ')' ) append(key);
 });
 
-/* Secret input field (hidden) */
-const secretInputHTML = `
-  <input type="text" id="secretInput" autocomplete="off" style="
-    position:absolute; left:-9999px; width:1px; height:1px; opacity:0;">
-`;
-$("body").insertAdjacentHTML("beforeend", secretInputHTML);
-const secretInput = $("#secretInput");
+/* ---------- Clear & Backspace ---------- */
+$('#clear').addEventListener('click', () => {
+  display.value = '';
+  inputQueue = '';
+});
+$('#backspace').addEventListener('click', () => {
+  display.value = display.value.slice(0, -1);
+  // Remove last char from queue
+  inputQueue = inputQueue.slice(0, -1);
+});
 
-/* Initial render */
-updateDisplay();
-
-/* Animation for secret badge on unlock */
-const pulse = [
-  { transform: "scale(1)" },
-  { transform: "scale(1.4)" },
-  { transform: "scale(1)" }
-];
-secretBadge.animate(pulse, { duration:1000, iterations:Infinity });
+/* ---------- Hide secret on page load ---------- */
+secretEl.classList.remove('show');
 </script>
 </body>
 </html>
