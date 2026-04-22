@@ -6,159 +6,159 @@
     <title>Amazing Calculator</title>
     <style>
         body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background: #f0f4f8;
-            font-family: 'Arial', sans-serif;
-            margin: 0;
+            overflow: hidden;
         }
         .calculator {
-            background: #ffffff;
-            border-radius: 16px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            width: 300px;
-            overflow: hidden;
-            border: 1px solid #e2e8f0;
-        }
-        .calculator-display {
-            background: #2d3748;
-            color: #ffffff;
-            font-size: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             padding: 20px;
-            text-align: right;
-            border-bottom: 1px solid #e2e8f0;
+            width: 300px;
+            text-align: center;
+            transition: transform 0.3s ease;
         }
-        .calculator-buttons {
+        .calculator:hover {
+            transform: scale(1.05);
+        }
+        .display {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 10px;
+            font-size: 24px;
+            color: white;
+            margin-bottom: 20px;
+            text-align: right;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .buttons {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
         }
-        .calculator-button {
-            background: #e2e8f0;
+        .button {
+            background: rgba(255, 255, 255, 0.1);
             border: none;
-            font-size: 1.5rem;
+            border-radius: 10px;
             padding: 20px;
-            transition: background 0.3s, transform 0.3s;
-            outline: none;
+            font-size: 20px;
+            color: white;
             cursor: pointer;
+            transition: background 0.3s ease, transform 0.3s ease;
         }
-        .calculator-button:hover {
-            background: #cbd5e0;
+        .button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
         }
-        .calculator-button:active {
-            transform: scale(0.98);
-        }
-        .calculator-button.ac {
-            background: #feb2b2;
-        }
-        .calculator-button.ac:hover {
-            background: #f56565;
-        }
-        .calculator-button.equal {
-            background: #48bb78;
-            grid-column: span 2;
-        }
-        .calculator-button.equal:hover {
-            background: #42996d;
-        }
-        .calculator-button.operator {
-            background: #667eea;
-        }
-        .calculator-button.operator:hover {
-            background: #639;
+        .hidden-message {
+            display: none;
+            margin-top: 20px;
+            font-size: 18px;
+            color: #34eb9b;
+            animation: fadeIn 1s ease forwards;
         }
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
         }
-        .calculator {
-            animation: fadeIn 1s ease-in-out;
-        }
     </style>
 </head>
 <body>
     <div class="calculator">
-        <div class="calculator-display" id="display">0</div>
-        <div class="calculator-buttons">
-            <button class="calculator-button ac" onclick="clearDisplay()">AC</button>
-            <button class="calculator-button" onclick="appendNumber('7')">7</button>
-            <button class="calculator-button" onclick="appendNumber('8')">8</button>
-            <button class="calculator-button" onclick="appendNumber('9')">9</button>
-            <button class="calculator-button operator" onclick="setOperation('/')">/</button>
-            <button class="calculator-button" onclick="appendNumber('4')">4</button>
-            <button class="calculator-button" onclick="appendNumber('5')">5</button>
-            <button class="calculator-button" onclick="appendNumber('6')">6</button>
-            <button class="calculator-button operator" onclick="setOperation('*')">*</button>
-            <button class="calculator-button" onclick="appendNumber('1')">1</button>
-            <button class="calculator-button" onclick="appendNumber('2')">2</button>
-            <button class="calculator-button" onclick="appendNumber('3')">3</button>
-            <button class="calculator-button operator" onclick="setOperation('-')">-</button>
-            <button class="calculator-button" onclick="appendNumber('0')">0</button>
-            <button class="calculator-button" onclick="appendNumber('.')">.</button>
-            <button class="calculator-button equal" onclick="calculate()">=</button>
-            <button class="calculator-button operator" onclick="setOperation('+')">+</button>
+        <div class="display" id="display">0</div>
+        <div class="buttons">
+            <button class="button" onclick="appendNumber('7')">7</button>
+            <button class="button" onclick="appendNumber('8')">8</button>
+            <button class="button" onclick="appendNumber('9')">9</button>
+            <button class="button" onclick="setOperation('/')">/</button>
+            <button class="button" onclick="appendNumber('4')">4</button>
+            <button class="button" onclick="appendNumber('5')">5</button>
+            <button class="button" onclick="appendNumber('6')">6</button>
+            <button class="button" onclick="setOperation('*')">*</button>
+            <button class="button" onclick="appendNumber('1')">1</button>
+            <button class="button" onclick="appendNumber('2')">2</button>
+            <button class="button" onclick="appendNumber('3')">3</button>
+            <button class="button" onclick="setOperation('-')">-</button>
+            <button class="button" onclick="appendNumber('0')">0</button>
+            <button class="button" onclick="clearDisplay()">C</button>
+            <button class="button" onclick="calculateResult()">=</button>
+            <button class="button" onclick="setOperation('+')">+</button>
         </div>
+        <div class="hidden-message" id="hiddenMessage">🎉 Unlocked Hidden Message! 🎉</div>
     </div>
 
     <script>
         let currentInput = '';
-        let previousInput = '';
-        let operation = null;
-
-        function clearDisplay() {
-            currentInput = '';
-            previousInput = '';
-            operation = null;
-            updateDisplay();
-        }
+        let firstOperand = null;
+        let secondOperand = null;
+        let currentOperation = null;
+        const display = document.getElementById('display');
+        const hiddenMessage = document.getElementById('hiddenMessage');
 
         function appendNumber(number) {
-            if (number === '.' && currentInput.includes('.')) return;
             currentInput += number;
             updateDisplay();
         }
 
-        function setOperation(op) {
+        function setOperation(operation) {
             if (currentInput === '') return;
-            if (previousInput !== '') {
-                calculate();
+            if (firstOperand === null) {
+                firstOperand = parseFloat(currentInput);
+            } else if (currentOperation) {
+                secondOperand = parseFloat(currentInput);
+                firstOperand = calculate(firstOperand, secondOperand, currentOperation);
             }
-            operation = op;
-            previousInput = currentInput;
+            currentOperation = operation;
             currentInput = '';
         }
 
-        function calculate() {
-            let result;
-            const prev = parseFloat(previousInput);
-            const current = parseFloat(currentInput);
-            if (isNaN(prev) || isNaN(current)) return;
+        function calculateResult() {
+            if (currentInput === '' || currentOperation === null) return;
+            secondOperand = parseFloat(currentInput);
+            const result = calculate(firstOperand, secondOperand, currentOperation);
+            currentInput = result.toString();
+            firstOperand = null;
+            secondOperand = null;
+            currentOperation = null;
+            updateDisplay();
+        }
+
+        function calculate(a, b, operation) {
             switch (operation) {
-                case '+':
-                    result = prev + current;
-                    break;
-                case '-':
-                    result = prev - current;
-                    break;
-                case '*':
-                    result = prev * current;
-                    break;
-                case '/':
-                    result = prev / current;
-                    break;
-                default:
-                    return;
+                case '+': return a + b;
+                case '-': return a - b;
+                case '*': return a * b;
+                case '/': return a / b;
+                default: return b;
             }
-            currentInput = result;
-            operation = null;
-            previousInput = '';
+        }
+
+        function clearDisplay() {
+            currentInput = '';
+            firstOperand = null;
+            secondOperand = null;
+            currentOperation = null;
             updateDisplay();
         }
 
         function updateDisplay() {
-            const display = document.getElementById('display');
-            display.innerText = currentInput || '0';
+            display.textContent = currentInput || '0';
+            if (currentInput === '535688') {
+                hiddenMessage.style.display = 'block';
+            } else {
+                hiddenMessage.style.display = 'none';
+            }
         }
     </script>
 </body>
