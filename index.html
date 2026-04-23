@@ -3,32 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NexusVision | Cinematic SaaS Platform</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/font-awesome.min.css">
+    <title>NexusAI - Cinematic SaaS Platform</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --primary: #6366f1;
             --primary-dark: #4f46e5;
-            --secondary: #10b981;
+            --secondary: #8b5cf6;
             --dark: #0f172a;
-            --darker: #0c111f;
-            --light: #f1f5f9;
+            --darker: #0c1222;
+            --light: #f8fafc;
             --gray: #94a3b8;
-            --transition: all 0.4s cubic-bezier(0.17, 0.67, 0.83, 0.67);
+            --success: #10b981;
+            --gradient-start: #8b5cf6;
+            --gradient-end: #6366f1;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', sans-serif;
+            font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
         }
 
         body {
-            background: linear-gradient(135deg, var(--darker) 0%, #0a0e1f 100%);
+            background: linear-gradient(135deg, var(--darker), #0f172a);
             color: var(--light);
             overflow-x: hidden;
             line-height: 1.6;
+        }
+
+        .gradient-bg {
+            background: radial-gradient(
+                circle at 10% 20%,
+                rgba(99, 102, 241, 0.2) 0%,
+                rgba(15, 23, 42, 0) 40%
+            ), radial-gradient(
+                circle at 90% 80%,
+                rgba(139, 92, 246, 0.2) 0%,
+                rgba(15, 23, 42, 0) 30%
+            );
         }
 
         .container {
@@ -38,195 +52,136 @@
             padding: 0 20px;
         }
 
-        /* Header Styles */
+        /* Header & Navigation */
         header {
+            padding: 1.5rem 0;
             position: fixed;
             top: 0;
-            left: 0;
             width: 100%;
             z-index: 1000;
-            padding: 20px 0;
+            background: rgba(15, 23, 42, 0.8);
             backdrop-filter: blur(10px);
-            background: rgba(12, 17, 31, 0.8);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        .header-content {
+        .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-weight: 800;
             font-size: 1.8rem;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            font-weight: 800;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: transparent;
+            text-decoration: none;
         }
 
-        .logo-icon {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 12px;
-        }
-
-        nav ul {
+        .nav-links {
             display: flex;
-            list-style: none;
-            gap: 30px;
+            gap: 2rem;
         }
 
-        nav a {
-            color: var(--light);
+        .nav-links a {
+            color: var(--gray);
             text-decoration: none;
             font-weight: 500;
-            transition: var(--transition);
-            position: relative;
+            transition: color 0.3s ease;
         }
 
-        nav a:hover {
-            color: var(--primary);
+        .nav-links a:hover {
+            color: var(--light);
         }
 
-        nav a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary);
-            transition: var(--transition);
-        }
-
-        nav a:hover::after {
-            width: 100%;
-        }
-
-        .nav-button {
-            background: linear-gradient(90deg, var(--primary), var(--primary-dark));
-            color: white;
-            border: none;
-            padding: 10px 24px;
-            border-radius: 30px;
+        .btn {
+            padding: 0.7rem 1.5rem;
+            border-radius: 12px;
             font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
             cursor: pointer;
-            transition: var(--transition);
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: white;
             box-shadow: 0 4px 20px rgba(99, 102, 241, 0.3);
         }
 
-        .nav-button:hover {
-            transform: translateY(-3px);
+        .btn-primary:hover {
             box-shadow: 0 6px 25px rgba(99, 102, 241, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--light);
+            border: 2px solid rgba(255, 255, 255, 0.1);
         }
 
         /* Hero Section */
         .hero {
             min-height: 100vh;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
             align-items: center;
-            text-align: center;
-            padding: 0 20px;
+            padding: 10rem 0 5rem;
             position: relative;
             overflow: hidden;
         }
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at center, rgba(99, 102, 241, 0.15) 0%, transparent 70%);
-            z-index: -1;
-        }
-
         .hero-content {
-            max-width: 800px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
             z-index: 2;
         }
 
         .hero h1 {
-            font-size: clamp(2.5rem, 5vw, 4.5rem);
-            font-weight: 900;
-            margin-bottom: 20px;
-            background: linear-gradient(90deg, #f0f0f0, #e2e2e2);
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, #f8fafc, var(--primary));
             -webkit-background-clip: text;
             background-clip: text;
-            -webkit-text-fill-color: transparent;
-            line-height: 1.1;
+            color: transparent;
+            line-height: 1.2;
         }
 
         .hero p {
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             color: var(--gray);
             max-width: 600px;
-            margin: 0 auto 40px;
+            margin-bottom: 2.5rem;
         }
 
         .hero-buttons {
             display: flex;
-            gap: 20px;
-            justify-content: center;
-            margin-top: 30px;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            padding: 16px 32px;
-            border-radius: 16px;
-            font-weight: 600;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: var(--transition);
-            border: none;
-        }
-
-        .btn-primary {
-            background: linear-gradient(90deg, var(--primary), var(--primary-dark));
-            color: white;
-            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--light);
-            border: 2px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.6);
+            gap: 1rem;
+            margin-top: 2rem;
         }
 
         /* Features Section */
         .features {
-            padding: 100px 0;
-            position: relative;
+            padding: 8rem 0;
         }
 
         .section-header {
             text-align: center;
             max-width: 700px;
-            margin: 0 auto 60px;
+            margin: 0 auto 4rem;
         }
 
         .section-header h2 {
             font-size: 2.5rem;
-            margin-bottom: 20px;
-            background: linear-gradient(90deg, var(--light), var(--gray));
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.5rem;
         }
 
         .section-header p {
@@ -237,58 +192,38 @@
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            gap: 2.5rem;
         }
 
         .feature-card {
             background: rgba(30, 41, 59, 0.5);
-            border-radius: 20px;
-            padding: 30px;
-            backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
+            border-radius: 20px;
+            padding: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            backdrop-filter: blur(10px);
         }
 
         .feature-card:hover {
             transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
             border-color: rgba(99, 102, 241, 0.3);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.5s ease;
-        }
-
-        .feature-card:hover::before {
-            transform: scaleX(1);
         }
 
         .feature-icon {
             width: 60px;
             height: 60px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 25px;
-            font-size: 24px;
+            margin-bottom: 1.5rem;
         }
 
         .feature-card h3 {
             font-size: 1.5rem;
-            margin: 20px 0 15px;
+            margin-bottom: 1rem;
         }
 
         .feature-card p {
@@ -297,37 +232,27 @@
 
         /* Testimonials */
         .testimonials {
-            padding: 100px 0;
-            text-align: center;
+            padding: 8rem 0;
+            background: rgba(15, 23, 42, 0.5);
         }
 
-        .testimonials-grid {
+        .testimonial-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
+            gap: 2rem;
         }
 
         .testimonial-card {
             background: rgba(30, 41, 59, 0.5);
             border-radius: 20px;
-            padding: 30px;
-            text-align: left;
+            padding: 2rem;
             border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: var(--transition);
         }
 
-        .testimonial-card:hover {
-            border-color: rgba(99, 102, 241, 0.5);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .testimonial-content {
+        .testimonial-header {
             display: flex;
             align-items: center;
-            gap: 15px;
-            margin-bottom: 20px;
+            margin-bottom: 1.5rem;
         }
 
         .testimonial-avatar {
@@ -335,167 +260,132 @@
             height: 50px;
             border-radius: 50%;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
+            margin-right: 1rem;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-weight: bold;
         }
 
         .testimonial-text {
-            font-style: italic;
             color: var(--gray);
-            margin-bottom: 15px;
+            font-style: italic;
+            margin-bottom: 1rem;
         }
 
         .testimonial-author {
-            color: var(--light);
             font-weight: 600;
         }
 
-        .testimonial-position {
+        .testimonial-role {
             color: var(--gray);
             font-size: 0.9rem;
         }
 
         /* CTA Section */
-        .cta-section {
-            padding: 100px 0;
+        .cta {
+            padding: 8rem 0;
             text-align: center;
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(16, 185, 129, 0.1) 100%);
-            border-radius: 30px;
-            margin: 50px 0;
         }
 
-        .cta-content {
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .cta-content h2 {
+        .cta h2 {
             font-size: 2.5rem;
-            margin-bottom: 20px;
+            margin-bottom: 1.5rem;
         }
 
-        .cta-content p {
+        .cta p {
             color: var(--gray);
-            margin-bottom: 30px;
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+            font-size: 1.2rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1.2rem 3rem;
             font-size: 1.2rem;
         }
 
         /* Footer */
         footer {
-            padding: 50px 0 20px;
+            padding: 4rem 0 2rem;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        .footer-content {
+        .footer-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
-            margin-bottom: 50px;
+            gap: 2rem;
+            margin-bottom: 3rem;
         }
 
-        .footer-logo {
-            font-size: 2rem;
-            font-weight: 800;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 20px;
-        }
-
-        .footer-links h3 {
-            margin-bottom: 20px;
+        .footer-column h3 {
             font-size: 1.3rem;
+            margin-bottom: 1.5rem;
         }
 
-        .footer-links ul {
+        .footer-links {
             list-style: none;
         }
 
         .footer-links li {
-            margin-bottom: 12px;
+            margin-bottom: 0.8rem;
         }
 
         .footer-links a {
             color: var(--gray);
             text-decoration: none;
-            transition: var(--transition);
+            transition: color 0.3s ease;
         }
 
         .footer-links a:hover {
-            color: var(--primary);
-            padding-left: 5px;
+            color: var(--light);
         }
 
         .copyright {
             text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 2rem;
             color: var(--gray);
-            font-size: 0.9rem;
-        }
-
-        /* Animations */
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-            100% { transform: translateY(0px); }
-        }
-
-        .floating {
-            animation: float 6s ease-in-out infinite;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         /* Responsive */
         @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                gap: 20px;
+            .hero h1 {
+                font-size: 2.5rem;
             }
-
-            nav ul {
-                gap: 15px;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-
+            
             .hero-buttons {
                 flex-direction: column;
                 align-items: center;
             }
-
-            .btn {
-                width: 100%;
-                max-width: 300px;
+            
+            .nav-links {
+                display: none;
             }
         }
     </style>
 </head>
-<body>
+<body class="gradient-bg">
+    <!-- Header -->
     <header>
-        <div class="container header-content">
-            <div class="logo">
-                <div class="logo-icon"></div>
-                <span>NexusVision</span>
+        <div class="container navbar">
+            <a href="#" class="logo">NexusAI</a>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#testimonials">Testimonials</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#contact">Contact</a>
             </div>
-            <nav>
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Features</a></li>
-                    <li><a href="#">Pricing</a></li>
-                    <li><a href="#">Testimonials</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-            </nav>
-            <button class="nav-button">Get Started</button>
+            <button class="btn btn-primary">Get Started</button>
         </div>
     </header>
 
+    <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <h1>Transform Your Vision Into Reality</h1>
-            <p>Experience the future of cinematic content creation with our AI-powered platform designed for creators who demand the extraordinary.</p>
+            <h1>Transform Your Business with AI-Powered Solutions</h1>
+            <p>Harness the power of artificial intelligence to automate workflows, gain insights, and scale your operations like never before.</p>
             <div class="hero-buttons">
                 <button class="btn btn-primary">Start Free Trial</button>
                 <button class="btn btn-secondary">View Demo</button>
@@ -503,155 +393,175 @@
         </div>
     </section>
 
-    <div class="container">
-        <section class="features">
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
             <div class="section-header">
-                <h2>Powerful Features for Creators</h2>
-                <p>Everything you need to bring your cinematic vision to life in one powerful platform.</p>
+                <h2>Powerful Features for Modern Businesses</h2>
+                <p>Everything you need to transform data into actionable insights</p>
             </div>
-            
             <div class="features-grid">
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <i class="fa fa-magic" aria-hidden="true"></i>
+                        <i class="fas fa-brain fa-2x"></i>
                     </div>
-                    <h3>AI-Powered Creation</h3>
-                    <p class="feature-text">Leverage cutting-edge AI to generate stunning visuals, scripts, and storyboards in seconds.</p>
+                    <h3>AI-Powered Analytics</h3>
+                    <p>Get deep insights from your data with our advanced machine learning algorithms that identify patterns and predict trends.</p>
                 </div>
-                
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <i class="fa fa-paint-brush" aria-hidden="true"></i>
+                        <i class="fas fa-bolt fa-2x"></i>
                     </div>
-                    <h3>Real-time Collaboration</h3>
-                    <p class="feature-text">Work seamlessly with your team in real-time with our collaborative editing tools.</p>
+                    <h3>Lightning Fast Processing</h3>
+                    <p>Process millions of data points in seconds with our optimized infrastructure and parallel computing capabilities.</p>
                 </div>
-                
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <i class="fa fa-cloud" aria-hidden="true"></i>
+                        <i class="fas fa-shield-alt fa-2x"></i>
                     </div>
-                    <h3>Cloud Integration</h3>
-                    <p class="feature-text">Access your projects from anywhere with our secure cloud-based infrastructure.</p>
+                    <h3>Enterprise Security</h3>
+                    <p>Military-grade encryption and compliance with international data protection regulations keep your information safe.</p>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section class="testimonials">
+    <!-- Testimonials -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
             <div class="section-header">
                 <h2>Trusted by Industry Leaders</h2>
-                <p>Join thousands of creators who are already transforming their workflow.</p>
+                <p>Join thousands of satisfied customers transforming their business</p>
             </div>
-            
-            <div class="testimonials-grid">
+            <div class="testimonial-grid">
                 <div class="testimonial-card">
-                    <div class="testimonial-content">
-                        <div class="testimonial-avatar"></div>
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">MJ</div>
                         <div>
-                            <div class="testimonial-author">Alex Morgan</div>
-                            <div class="testimonial-position">Creative Director, Studio X</div>
+                            <div class="testimonial-author">Michael Johnson</div>
+                            <div class="testimonial-role">CTO, TechGlobal</div>
                         </div>
                     </div>
-                    <p class="testimonial-text">"This platform has completely revolutionized how we approach content creation. The AI tools save us countless hours."</p>
+                    <p class="testimonial-text">"NexusAI increased our operational efficiency by 340% in just three months. The insights we gained were game-changing for our business strategy."</p>
                 </div>
-                
                 <div class="testimonial-card">
-                    <div class="testimonial-content">
-                        <div class="testimonial-avatar"></div>
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">SE</div>
                         <div>
-                            <div class="testimonial-author">Jamie Chen</div>
-                            <div class="testimonial-position">Producer, Visionary Films</div>
+                            <div class="testimonial-author">Sarah Evans</div>
+                            <div class="testimonial-role">Product Director, InnovateCo</div>
                         </div>
                     </div>
-                    <p class="testimonial-text">"The collaborative features have made remote production seamless. We can work together from different continents."</p>
+                    <p class="testimonial-text">"The predictive analytics helped us reduce costs by 40% while improving customer satisfaction scores across all channels."</p>
                 </div>
-                
                 <div class="testimonial-card">
-                    <div class="testimonial-content">
-                        <div class="testimonial-avatar"></div>
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">RK</div>
                         <div>
-                            <div class="testimonial-author">Taylor Reynolds</div>
-                            <div class="testimonial-position">Content Director, MediaCorp</div>
+                            <div class="testimonial-author">Robert Kim</div>
+                            <div class="testimonial-role">CEO, FutureTech</div>
                         </div>
                     </div>
-                    <p class="testimonial-text">"The quality of AI-generated content has exceeded our expectations. It's like having a creative partner."</p>
+                    <p class="testimonial-text">"Implementation was seamless and the ROI was visible within the first quarter. Their support team is exceptional."</p>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section class="cta-section">
-            <div class="cta-content">
-                <h2>Ready to Transform Your Workflow?</h2>
-                <p>Join thousands of creators who are already using our platform to bring their visions to life.</p>
-                <button class="btn btn-primary">Start Your Free Trial</button>
-            </div>
-        </section>
-    </div>
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>Ready to Transform Your Business?</h2>
+            <p>Join thousands of forward-thinking companies using NexusAI to drive innovation and growth.</p>
+            <button class="btn btn-primary cta-button">Start Your Free Trial</button>
+        </div>
+    </section>
 
+    <!-- Footer -->
     <footer>
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-links">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>NexusAI</h3>
+                    <p style="color: var(--gray); margin-top: 1rem;">AI-powered solutions for the modern enterprise.</p>
+                </div>
+                <div class="footer-column">
                     <h3>Product</h3>
-                    <ul>
+                    <ul class="footer-links">
                         <li><a href="#">Features</a></li>
                         <li><a href="#">Solutions</a></li>
                         <li><a href="#">Pricing</a></li>
-                        <li><a href="#">Releases</a></li>
+                        <li><a href="#">Demo</a></li>
                     </ul>
                 </div>
-                <div class="footer-links">
-                    <h3>Resources</h3>
-                    <ul>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">Tutorials</a></li>
-                        <li><a href="#">Support</a></li>
-                        <li><a href="#">Community</a></li>
-                    </ul>
-                </div>
-                <div class="footer-links">
+                <div class="footer-column">
                     <h3>Company</h3>
-                    <ul>
-                        <li><a href="#">About Us</a></li>
+                    <ul class="footer-links">
+                        <li><a href="#">About</a></li>
                         <li><a href="#">Careers</a></li>
+                        <li><a href="#">Blog</a></li>
                         <li><a href="#">Contact</a></li>
-                        <li><a href="#">Partners</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Legal</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
                     </ul>
                 </div>
             </div>
             <div class="copyright">
-                &copy; 2023 NexusVision. All rights reserved.
+                &copy; 2023 NexusAI. All rights reserved.
             </div>
         </div>
     </footer>
 
-    <script>
-        // Smooth scrolling for navigation
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
+ <script>
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            // Fix: Check if targetId is just '#' which is invalid
+            if(targetId && targetId !== '#' && targetId !== '#/') {
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
                     window.scrollTo({
-                        top: target.offsetTop - 80,
+                        top: targetElement.offsetTop - 80,
                         behavior: 'smooth'
                     });
                 }
+            }
+        });
+    });
+
+    // Simple animation for feature cards on scroll
+    document.addEventListener('DOMContentLoaded', function() {
+        const featureCards = document.querySelectorAll('.feature-card');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    // Add delay for staggered effect
+                    setTimeout(() => {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }, index * 150);
+                }
             });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
         });
 
-        // Add animation to feature cards on hover
-        document.querySelectorAll('.feature-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-10px)';
-                this.style.boxShadow = '0 15px 30px rgba(0, 0, 0, 0.3)';
-            });
-
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0)';
-                this.style.boxShadow = 'none';
-            });
+        // Initialize cards with hidden state
+        featureCards.forEach(card => {
+            card.style.transition = 'all 0.6s ease-out';
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            observer.observe(card);
         });
-    </script>
-</body>
-</html>
+    });
+</script>
