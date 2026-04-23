@@ -3,81 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NexusAI - Cinematic SaaS Platform</title>
+    <title>Nexus | Futuristic Tech Experience</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #6366f1;
-            --primary-dark: #4f46e5;
-            --secondary: #8b5cf6;
-            --dark: #0f172a;
-            --darker: #0c1222;
-            --light: #f8fafc;
-            --gray: #94a3b8;
-            --success: #10b981;
-            --gradient-start: #8b5cf6;
-            --gradient-end: #6366f1;
+            --primary: #0a0a1a;
+            --secondary: #1a1a2e;
+            --accent: #ff2a6d;
+            --accent-dark: #d1004f;
+            --text: #e6e6e6;
+            --text-secondary: #a0a0b0;
+            --glow: 0 0 15px rgba(255, 42, 109, 0.7), 0 0 30px rgba(255, 42, 109, 0.4);
+            --transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            background: linear-gradient(135deg, var(--darker), #0f172a);
-            color: var(--light);
+            background: linear-gradient(135deg, #0a0a1a 0%, #1a1a2e 100%);
+            color: var(--text);
+            min-height: 100vh;
             overflow-x: hidden;
-            line-height: 1.6;
+            position: relative;
         }
 
-        .gradient-bg {
-            background: radial-gradient(
-                circle at 10% 20%,
-                rgba(99, 102, 241, 0.2) 0%,
-                rgba(15, 23, 42, 0) 40%
-            ), radial-gradient(
-                circle at 90% 80%,
-                rgba(139, 92, 246, 0.2) 0%,
-                rgba(15, 23, 42, 0) 30%
-            );
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(255, 42, 109, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(255, 42, 109, 0.1) 0%, transparent 20%);
+            z-index: -1;
         }
 
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Header & Navigation */
-        header {
-            padding: 1.5rem 0;
+        /* Header Styles */
+        .header {
             position: fixed;
             top: 0;
             width: 100%;
-            z-index: 1000;
-            background: rgba(15, 23, 42, 0.8);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .navbar {
+            padding: 1.5rem 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            z-index: 1000;
+            background: rgba(10, 10, 26, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 42, 109, 0.3);
         }
 
         .logo {
             font-size: 1.8rem;
             font-weight: 800;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
+            background: linear-gradient(90deg, #ff2a6d, #d1004f);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            text-decoration: none;
+            text-shadow: var(--glow);
+            letter-spacing: 1px;
         }
 
         .nav-links {
@@ -86,139 +77,129 @@
         }
 
         .nav-links a {
-            color: var(--gray);
+            color: var(--text);
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: var(--transition);
+        }
+
+        .nav-links a::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: var(--transition);
         }
 
         .nav-links a:hover {
-            color: var(--light);
+            color: var(--accent);
         }
 
-        .btn {
-            padding: 0.7rem 1.5rem;
-            border-radius: 12px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: none;
-            font-size: 1rem;
-        }
-
-        .btn-primary {
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            color: white;
-            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.3);
-        }
-
-        .btn-primary:hover {
-            box-shadow: 0 6px 25px rgba(99, 102, 241, 0.5);
-            transform: translateY(-2px);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--light);
-            border: 2px solid rgba(255, 255, 255, 0.1);
+        .nav-links a:hover::after {
+            width: 100%;
         }
 
         /* Hero Section */
         .hero {
             min-height: 100vh;
             display: flex;
+            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            padding: 10rem 0 5rem;
-            position: relative;
-            overflow: hidden;
+            text-align: center;
+            padding: 0 1.5rem;
+            padding-top: 5rem;
         }
 
         .hero-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            max-width: 900px;
-            margin: 0 auto;
-            z-index: 2;
+            max-width: 800px;
+            padding: 2rem;
+            margin-top: 3rem;
         }
 
         .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
+            font-size: 4rem;
             margin-bottom: 1.5rem;
-            background: linear-gradient(to right, #f8fafc, var(--primary));
+            background: linear-gradient(90deg, #ff2a6d, #d1004f);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            line-height: 1.2;
+            text-shadow: var(--glow);
+            animation: glow-pulse 3s infinite alternate;
+        }
+
+        @keyframes glow-pulse {
+            0% {
+                text-shadow: 0 0 10px rgba(255, 42, 109, 0.5);
+            }
+            100% {
+                text-shadow: 0 0 20px rgba(255, 42, 109, 0.8), 0 0 30px rgba(255, 42, 109, 0.6);
+            }
         }
 
         .hero p {
-            font-size: 1.25rem;
-            color: var(--gray);
-            max-width: 600px;
-            margin-bottom: 2.5rem;
+            font-size: 1.4rem;
+            margin-bottom: 2rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
         }
 
-        .hero-buttons {
-            display: flex;
-            gap: 1rem;
-            margin-top: 2rem;
+        .cta-button {
+            background: linear-gradient(45deg, #ff2a6d, #d1004f);
+            border: none;
+            padding: 1rem 2.5rem;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: var(--glow);
+            transition: var(--transition);
+            margin-top: 1rem;
+            letter-spacing: 1px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px rgba(255, 42, 109, 0.8);
         }
 
         /* Features Section */
         .features {
-            padding: 8rem 0;
-        }
-
-        .section-header {
-            text-align: center;
-            max-width: 700px;
-            margin: 0 auto 4rem;
-        }
-
-        .section-header h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .section-header p {
-            color: var(--gray);
-            font-size: 1.2rem;
-        }
-
-        .features-grid {
+            padding: 5rem 5%;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2.5rem;
+            gap: 2rem;
         }
 
         .feature-card {
-            background: rgba(30, 41, 59, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
+            background: rgba(26, 26, 46, 0.3);
+            border: 1px solid rgba(255, 42, 109, 0.3);
+            border-radius: 15px;
             padding: 2rem;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+            transition: var(--transition);
             backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
         }
 
         .feature-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-            border-color: rgba(99, 102, 241, 0.3);
+            background: rgba(255, 42, 109, 0.1);
+            border: 1px solid rgba(255, 42, 109, 0.6);
+            box-shadow: var(--glow);
         }
 
         .feature-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            font-size: 3rem;
             margin-bottom: 1.5rem;
+            color: #ff2a6d;
+            text-shadow: 0 0 15px rgba(255, 42, 109, 0.7);
         }
 
         .feature-card h3 {
@@ -227,341 +208,244 @@
         }
 
         .feature-card p {
-            color: var(--gray);
-        }
-
-        /* Testimonials */
-        .testimonials {
-            padding: 8rem 0;
-            background: rgba(15, 23, 42, 0.5);
-        }
-
-        .testimonial-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .testimonial-card {
-            background: rgba(30, 41, 59, 0.5);
-            border-radius: 20px;
-            padding: 2rem;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .testimonial-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .testimonial-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            margin-right: 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-        }
-
-        .testimonial-text {
-            color: var(--gray);
-            font-style: italic;
-            margin-bottom: 1rem;
-        }
-
-        .testimonial-author {
-            font-weight: 600;
-        }
-
-        .testimonial-role {
-            color: var(--gray);
-            font-size: 0.9rem;
-        }
-
-        /* CTA Section */
-        .cta {
-            padding: 8rem 0;
-            text-align: center;
-        }
-
-        .cta h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .cta p {
-            color: var(--gray);
-            max-width: 600px;
-            margin: 0 auto 2.5rem;
-            font-size: 1.2rem;
-        }
-
-        .cta-button {
-            display: inline-block;
-            padding: 1.2rem 3rem;
-            font-size: 1.2rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
         }
 
         /* Footer */
-        footer {
-            padding: 4rem 0 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .footer-column h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-links a {
-            color: var(--gray);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .footer-links a:hover {
-            color: var(--light);
-        }
-
-        .copyright {
+        .footer {
             text-align: center;
-            padding-top: 2rem;
-            color: var(--gray);
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 3rem;
+            border-top: 1px solid rgba(255, 42, 109, 0.3);
+            margin-top: 3rem;
         }
 
-        /* Responsive */
+        .footer p {
+            color: var(--text-secondary);
+        }
+
+        /* Animations */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .pulse {
+            animation: pulse 4s infinite;
+        }
+
+        /* Responsive Design */
         @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
             .hero h1 {
                 font-size: 2.5rem;
             }
             
-            .hero-buttons {
-                flex-direction: column;
-                align-items: center;
+            .hero p {
+                font-size: 1.1rem;
             }
             
-            .nav-links {
-                display: none;
+            .features {
+                grid-template-columns: 1fr;
+                padding: 2rem 1.5rem;
             }
+        }
+
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0a0a1a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #ff2a6d;
+            border-radius: 6px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #d1004f;
+        }
+
+        /* Mobile Navigation */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+                z-index: 1001;
+            }
+        }
+
+        /* Dark Mode Specific Styles */
+        .dark-glow {
+            text-shadow: 0 0 15px rgba(255, 42, 109, 0.7);
+        }
+
+        /* Glow Effects */
+        .glow-effect {
+            box-shadow: var(--glow);
+        }
+
+        /* Section Titles */
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin: 2rem 0;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #ff2a6d, transparent);
+            border-radius: 3px;
         }
     </style>
 </head>
-<body class="gradient-bg">
-    <!-- Header -->
-    <header>
-        <div class="container navbar">
-            <a href="#" class="logo">NexusAI</a>
-            <div class="nav-links">
-                <a href="#features">Features</a>
-                <a href="#testimonials">Testimonials</a>
-                <a href="#pricing">Pricing</a>
-                <a href="#contact">Contact</a>
-            </div>
-            <button class="btn btn-primary">Get Started</button>
-        </div>
+<body>
+    <header class="header">
+        <div class="logo">NEXUS</div>
+        <nav class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#features">Features</a>
+            <a href="#tech">Technology</a>
+            <a href="#contact">Contact</a>
+        </nav>
+        <button class="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+        </button>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero" id="home">
         <div class="hero-content">
-            <h1>Transform Your Business with AI-Powered Solutions</h1>
-            <p>Harness the power of artificial intelligence to automate workflows, gain insights, and scale your operations like never before.</p>
-            <div class="hero-buttons">
-                <button class="btn btn-primary">Start Free Trial</button>
-                <button class="btn btn-secondary">View Demo</button>
-            </div>
+            <h1 class="pulse">FUTURE IS NOW</h1>
+            <p>Experience the next generation of technology with our cutting-edge solutions designed for tomorrow's challenges.</p>
+            <button class="cta-button">GET STARTED</button>
         </div>
     </section>
 
-    <!-- Features Section -->
     <section class="features" id="features">
-        <div class="container">
-            <div class="section-header">
-                <h2>Powerful Features for Modern Businesses</h2>
-                <p>Everything you need to transform data into actionable insights</p>
-            </div>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-brain fa-2x"></i>
-                    </div>
-                    <h3>AI-Powered Analytics</h3>
-                    <p>Get deep insights from your data with our advanced machine learning algorithms that identify patterns and predict trends.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-bolt fa-2x"></i>
-                    </div>
-                    <h3>Lightning Fast Processing</h3>
-                    <p>Process millions of data points in seconds with our optimized infrastructure and parallel computing capabilities.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-shield-alt fa-2x"></i>
-                    </div>
-                    <h3>Enterprise Security</h3>
-                    <p>Military-grade encryption and compliance with international data protection regulations keep your information safe.</p>
-                </div>
-            </div>
+        <div class="feature-card floating">
+            <i class="fas fa-robot feature-icon"></i>
+            <h3>AI-Powered Solutions</h3>
+            <p>Harness the power of artificial intelligence to transform your business operations with predictive analytics and automation.</p>
+        </div>
+        <div class="feature-card floating" style="animation-delay: 0.5s;">
+            <i class="fas fa-shield-alt feature-icon"></i>
+            <h3>Military-Grade Security</h3>
+            <p>Protect your data with our quantum-resistant encryption protocols and zero-trust architecture.</p>
+        </div>
+        <div class="feature-card floating" style="animation-delay: 1s;">
+            <i class="fas fa-bolt feature-icon"></i>
+            <h3>Lightning Fast</h3>
+            <p>Experience unprecedented speed with our quantum processing capabilities and edge computing infrastructure.</p>
         </div>
     </section>
 
-    <!-- Testimonials -->
-    <section class="testimonials" id="testimonials">
-        <div class="container">
-            <div class="section-header">
-                <h2>Trusted by Industry Leaders</h2>
-                <p>Join thousands of satisfied customers transforming their business</p>
-            </div>
-            <div class="testimonial-grid">
-                <div class="testimonial-card">
-                    <div class="testimonial-header">
-                        <div class="testimonial-avatar">MJ</div>
-                        <div>
-                            <div class="testimonial-author">Michael Johnson</div>
-                            <div class="testimonial-role">CTO, TechGlobal</div>
-                        </div>
-                    </div>
-                    <p class="testimonial-text">"NexusAI increased our operational efficiency by 340% in just three months. The insights we gained were game-changing for our business strategy."</p>
-                </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-header">
-                        <div class="testimonial-avatar">SE</div>
-                        <div>
-                            <div class="testimonial-author">Sarah Evans</div>
-                            <div class="testimonial-role">Product Director, InnovateCo</div>
-                        </div>
-                    </div>
-                    <p class="testimonial-text">"The predictive analytics helped us reduce costs by 40% while improving customer satisfaction scores across all channels."</p>
-                </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-header">
-                        <div class="testimonial-avatar">RK</div>
-                        <div>
-                            <div class="testimonial-author">Robert Kim</div>
-                            <div class="testimonial-role">CEO, FutureTech</div>
-                        </div>
-                    </div>
-                    <p class="testimonial-text">"Implementation was seamless and the ROI was visible within the first quarter. Their support team is exceptional."</p>
-                </div>
-            </div>
+    <section class="features">
+        <div class="feature-card floating">
+            <i class="fas fa-microchip feature-icon"></i>
+            <h3>Neural Networks</h3>
+            <p>Our self-learning systems adapt to your needs in real-time, evolving with your business requirements.</p>
+        </div>
+        <div class="feature-card floating" style="animation-delay: 0.5s;">
+            <i class="fas fa-cloud feature-icon"></i>
+            <h3>Cloud Integration</h3>
+            <p>Seamlessly integrate with existing systems through our universal API ecosystem.</p>
+        </div>
+        <div class="feature-card floating" style="animation-delay: 1s;">
+            <i class="fas fa-cogs feature-icon"></i>
+            <h3>Automation Suite</h3>
+            <p>Automate complex workflows with our intuitive drag-and-drop interface.</p>
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="cta">
-        <div class="container">
-            <h2>Ready to Transform Your Business?</h2>
-            <p>Join thousands of forward-thinking companies using NexusAI to drive innovation and growth.</p>
-            <button class="btn btn-primary cta-button">Start Your Free Trial</button>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-column">
-                    <h3>NexusAI</h3>
-                    <p style="color: var(--gray); margin-top: 1rem;">AI-powered solutions for the modern enterprise.</p>
-                </div>
-                <div class="footer-column">
-                    <h3>Product</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Features</a></li>
-                        <li><a href="#">Solutions</a></li>
-                        <li><a href="#">Pricing</a></li>
-                        <li><a href="#">Demo</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Company</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Careers</a></li>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Legal</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms of Service</a></li>
-                        <li><a href="#">Cookie Policy</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="copyright">
-                &copy; 2023 NexusAI. All rights reserved.
-            </div>
-        </div>
+    <footer class="footer">
+        <p>© 2023 NEXUS Technologies. All systems operational.</p>
     </footer>
 
- <script>
-    // Smooth scrolling for navigation links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href');
-            // Fix: Check if targetId is just '#' which is invalid
-            if(targetId && targetId !== '#' && targetId !== '#/') {
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                }
-            }
-        });
-    });
-
-    // Simple animation for feature cards on scroll
-    document.addEventListener('DOMContentLoaded', function() {
-        const featureCards = document.querySelectorAll('.feature-card');
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry, index) => {
-                if (entry.isIntersecting) {
-                    // Add delay for staggered effect
-                    setTimeout(() => {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                    }, index * 150);
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if(targetId && targetId !== '#') {
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
                 }
             });
-        }, {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
         });
 
-        // Initialize cards with hidden state
-        featureCards.forEach(card => {
-            card.style.transition = 'all 0.6s ease-out';
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(20px)';
-            observer.observe(card);
+        // Simple animation for feature cards on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const featureCards = document.querySelectorAll('.feature-card');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = 'fadeIn 0.8s ease-out forwards';
+                        entry.target.style.opacity = '1';
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            featureCards.forEach(card => {
+                card.style.opacity = '0';
+                observer.observe(card);
+            });
         });
-    });
-</script>
+
+        // Add CSS for animations
+        const style = document.createElement('style');
+        style.innerHTML = `
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(20px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            
+            .feature-card {
+                transition: opacity 0.5s ease, transform 0.5s ease;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
