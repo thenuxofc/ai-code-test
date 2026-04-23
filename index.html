@@ -1,586 +1,682 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nexus Portfolio | Futuristic Design Studio</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --dark-bg: #0a0a14;
-            --dark-panel: #121225;
-            --dark-accent: #1a1a2e;
-            --glow-red: #ff003c;
-            --glow-red-soft: #ff2a5c;
-            --glow-red-light: #ff5c8d;
-            --text-primary: #f0f0f0;
-            --text-secondary: #a0a0b1;
-            --text-tertiary: #7a7a9d;
-            --transition-speed: 300ms;
-            --border-radius: 16px;
-            --gradient-start: rgba(26, 26, 46, 0.8);
-            --gradient-end: rgba(10, 10, 20, 0.95);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Exo 2', sans-serif;
-            background: var(--dark-bg);
-            color: var(--text-primary);
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
-
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 700;
-            letter-spacing: 1px;
-        }
-
-        /* Cinematic Intro Styles */
-        .cinematic-intro {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            z-index: 100;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
-            opacity: 1;
-            transition: opacity 1s ease-in-out;
-        }
-
-        .cinematic-intro.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .cinematic-content {
-            text-align: center;
-            max-width: 800px;
-            padding: 20px;
-        }
-
-        .cinematic-content h1 {
-            font-size: 4rem;
-            margin-bottom: 2rem;
-            text-transform: uppercase;
-            background: linear-gradient(90deg, var(--text-primary), var(--glow-red-light));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: 0 0 15px rgba(255, 0, 60, 0.2);
-            animation: glow-pulse 3s infinite;
-        }
-
-        .cinematic-content p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            max-width: 600px;
-            margin: 0 auto 2rem;
-            color: var(--text-secondary);
-        }
-
-        .cinematic-content .btn {
-            background: linear-gradient(45deg, var(--glow-red), #ff2a5c);
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 30px;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 600;
-            font-size: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            cursor: pointer;
-            box-shadow: 0 0 15px rgba(255, 0, 60, 0.5);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-        }
-
-        .cinematic-content .btn:after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, #ff2a5c, var(--glow-red));
-            z-index: -1;
-            transition: all 0.3s ease;
-        }
-
-        .cinematic-content .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 20px rgba(255, 0, 60, 0.7);
-        }
-
-        .cinematic-content .btn:hover:after {
-            opacity: 0.9;
-        }
-
-        /* Main Content Styles */
-        .main-content {
-            position: relative;
-            z-index: 10;
-            padding: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        header {
-            padding: 20px 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 20;
-            backdrop-filter: blur(10px);
-            background: rgba(18, 18, 37, 0.8);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .logo {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 700;
-            background: linear-gradient(90deg, var(--glow-red-light), var(--text-primary));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: 0 0 10px rgba(255, 0, 60, 0.3);
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 30px;
-        }
-
-        nav a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 1rem;
-            transition: color var(--transition-speed);
-            position: relative;
-        }
-
-        nav a:after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--glow-red);
-            transition: width var(--transition-speed);
-        }
-
-        nav a:hover {
-            color: var(--glow-red-light);
-        }
-
-        nav a:hover:after {
-            width: 100%;
-        }
-
-        section {
-            padding: 80px 0;
-        }
-
-        .hero {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 40px;
-            align-items: center;
-            margin: 40px 0;
-        }
-
-        .hero-content {
-            flex: 1;
-            min-width: 300px;
-        }
-
-        .hero-content h1 {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            background: linear-gradient(90deg, var(--text-primary), var(--glow-red-light));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .hero-content p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-            color: var(--text-secondary);
-        }
-
-        .hero-image {
-            flex: 1;
-            min-width: 300px;
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            position: relative;
-            min-height: 400px;
-            background: linear-gradient(45deg, var(--dark-accent), var(--dark-panel));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .hero-image:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at center, rgba(255, 0, 60, 0.1) 0%, transparent 70%);
-            z-index: 1;
-        }
-
-        .hero-image:after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 20% 80%, rgba(255, 0, 60, 0.1) 1px, transparent 10%),
-                radial-gradient(circle at 80% 20%, rgba(255, 0, 60, 0.1) 1px, transparent 10%);
-            z-index: 2;
-        }
-
-        .hero-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.8;
-        }
-
-        .hero-image .glow {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at center, rgba(255, 0, 60, 0.2) 0%, transparent 70%);
-            z-index: 3;
-            animation: pulse-glow 3s infinite;
-        }
-
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin: 60px 0;
-        }
-
-        .feature-card {
-            background: var(--dark-panel);
-            border-radius: var(--border-radius);
-            padding: 30px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
-            border-color: var(--glow-red);
-        }
-
-        .feature-card:hover:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at center, rgba(255, 0, 60, 0.1) 0%, transparent 70%);
-            z-index: -1;
-        }
-
-        .feature-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            color: var(--glow-red-light);
-        }
-
-        .feature-card p {
-            color: var(--text-secondary);
-        }
-
-        .feature-card i {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            color: var(--glow-red-light);
-        }
-
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 30px;
-            margin: 60px 0;
-        }
-
-        .portfolio-item {
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            position: relative;
-            height: 300px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
-        }
-
-        .portfolio-item:hover {
-            transform: scale(1.03);
-            box-shadow: 0 10px 25px rgba(255, 0, 60, 0.3);
-        }
-
-        .portfolio-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .portfolio-item .overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            padding: 20px;
-            background: linear-gradient(to top, rgba(10, 10, 20, 0.9) 0%, transparent);
-            transition: all 0.3s ease;
-        }
-
-        .portfolio-item:hover .overlay {
-            background: linear-gradient(to top, rgba(255, 0, 60, 0.7) 0%, transparent);
-        }
-
-        .portfolio-item h3 {
-            font-size: 1.3rem;
-            margin-bottom: 10px;
-        }
-
-        footer {
-            padding: 40px 0;
-            text-align: center;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            margin-top: 60px;
-        }
-
-        footer p {
-            color: var(--text-tertiary);
-            margin: 10px 0;
-        }
-
-        /* Animations */
-        @keyframes pulse-glow {
-            0% {
-                opacity: 0.3;
-            }
-            50% {
-                opacity: 0.7;
-            }
-            100% {
-                opacity: 0.3;
-            }
-        }
-
-        @keyframes glow-pulse {
-            0% {
-                text-shadow: 0 0 15px rgba(255, 0, 60, 0.2);
-            }
-            50% {
-                text-shadow: 0 0 30px rgba(255, 0, 60, 0.5);
-            }
-            100% {
-                text-shadow: 0 0 15px rgba(255, 0, 60, 0.2);
-            }
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .cinematic-content h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero-content h1 {
-                font-size: 2.2rem;
-            }
-            
-            .features {
-                grid-template-columns: 1fr;
-            }
-            
-            nav ul {
-                gap: 15px;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero {
-                flex-direction: column;
-            }
-            
-            .cinematic-content {
-                padding: 10px;
-            }
-            
-            .cinematic-content h1 {
-                font-size: 2rem;
-            }
-        }
-
-        /* Scrollbar Styling */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--dark-accent);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--glow-red);
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--glow-red-light);
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SCIEO VLOGS | Cinematic Storytelling</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --dark: #0a0a0a;
+      --darker: #000000;
+      --accent: #ff2d75;
+      --accent-light: #ff5c97;
+      --gold: #d4af37;
+      --gold-light: #e6c371;
+      --light: #f5f5f5;
+      --gray: #222222;
+      --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--darker);
+      color: var(--light);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+    
+    h1, h2, h3, h4, h5 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 800;
+    }
+    
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    /* Header Styles */
+    header {
+      position: fixed;
+      width: 100%;
+      z-index: 1000;
+      padding: 20px 0;
+      transition: var(--transition);
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(10px);
+    }
+    
+    header.scrolled {
+      background: rgba(10, 10, 10, 0.95);
+      padding: 15px 0;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    }
+    
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      font-size: 28px;
+      font-weight: 800;
+      background: linear-gradient(90deg, var(--accent), var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 0 2px 10px rgba(255, 45, 117, 0.2);
+    }
+    
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 30px;
+    }
+    
+    nav a {
+      text-decoration: none;
+      color: var(--light);
+      font-weight: 600;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      position: relative;
+      padding: 5px 0;
+    }
+    
+    nav a:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: var(--transition);
+    }
+    
+    nav a:hover:after {
+      width: 100%;
+    }
+    
+    nav a.btn {
+      background: var(--accent);
+      color: white;
+      padding: 10px 25px;
+      border-radius: 30px;
+      font-weight: 700;
+      box-shadow: 0 5px 15px rgba(255, 45, 117, 0.3);
+    }
+    
+    nav a.btn:hover:after {
+      width: 0;
+    }
+    
+    /* Hero Section */
+    .hero {
+      height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)), url('https://images.unsplash.com/photo-1536300007807-821051249078?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=2068&q=80') no-repeat center center/cover;
+    }
+    
+    .hero-content {
+      padding: 0 50px;
+      max-width: 700px;
+      z-index: 2;
+    }
+    
+    .hero h1 {
+      font-size: 5rem;
+      margin-bottom: 20px;
+      text-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+      line-height: 1.1;
+    }
+    
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      max-width: 600px;
+      opacity: 0.9;
+    }
+    
+    .hero .btn {
+      display: inline-block;
+      background: var(--accent);
+      color: white;
+      padding: 15px 40px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      box-shadow: 0 10px 30px rgba(255, 45, 117, 0.4);
+      transition: var(--transition);
+      margin-right: 15px;
+      margin-bottom: 15px;
+    }
+    
+    .hero .btn:hover {
+      background: var(--accent-light);
+      transform: translateY(-3px);
+      box-shadow: 0 15px 35px rgba(255, 45, 117, 0.6);
+    }
+    
+    .hero .btn-secondary {
+      background: transparent;
+      border: 2px solid var(--light);
+    }
+    
+    .hero .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+    
+    /* Stats Section */
+    .stats {
+      background: var(--dark);
+      padding: 100px 0;
+      text-align: center;
+    }
+    
+    .stats h2 {
+      font-size: 2.5rem;
+      margin-bottom: 60px;
+      text-align: center;
+    }
+    
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+    
+    .stat-card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 15px;
+      padding: 30px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: var(--transition);
+    }
+    
+    .stat-card:hover {
+      transform: translateY(-10px);
+      background: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    }
+    
+    .stat-card h3 {
+      font-size: 2.8rem;
+      margin-bottom: 10px;
+      background: linear-gradient(90deg, var(--accent), var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .stat-card p {
+      font-size: 1.1rem;
+      opacity: 0.8;
+    }
+    
+    /* Features Section */
+    .features {
+      background: var(--darker);
+      padding: 100px 0;
+    }
+    
+    .section-title {
+      text-align: center;
+      margin-bottom: 70px;
+    }
+    
+    .section-title h2 {
+      font-size: 2.5rem;
+      display: inline-block;
+      position: relative;
+      padding-bottom: 15px;
+    }
+    
+    .section-title h2:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--gold));
+    }
+    
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+    
+    .feature-card {
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 15px;
+      padding: 40px 30px;
+      text-align: center;
+      transition: var(--transition);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .feature-card:hover {
+      transform: translateY(-10px);
+      background: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    }
+    
+    .feature-icon {
+      font-size: 3rem;
+      margin-bottom: 25px;
+      color: var(--accent);
+    }
+    
+    .feature-card h3 {
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+    }
+    
+    /* Testimonials */
+    .testimonials {
+      background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.9)), url('https://images.unsplash.com/photo-1543852786-1cf6624b9987?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1974&q=80') no-repeat center center/cover;
+      padding: 100px 0;
+    }
+    
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 50px;
+    }
+    
+    .testimonial-card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 15px;
+      padding: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .testimonial-card h3 {
+      font-size: 1.4rem;
+      margin: 20px 0 10px;
+    }
+    
+    .testimonial-card p {
+      font-style: italic;
+      opacity: 0.8;
+    }
+    
+    .client {
+      display: flex;
+      align-items: center;
+      margin-top: 20px;
+    }
+    
+    .client img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      margin-right: 15px;
+      object-fit: cover;
+    }
+    
+    .client-info {
+      text-align: left;
+    }
+    
+    .client-info h4 {
+      font-size: 1.1rem;
+      margin-bottom: 5px;
+    }
+    
+    .client-info p {
+      font-size: 0.9rem;
+      opacity: 0.7;
+      font-style: normal;
+    }
+    
+    /* CTA Section */
+    .cta {
+      background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.9)), url('https://images.unsplash.com/photo-1542744173-8e7e53415cc9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=2070&q=80') no-repeat center center/cover;
+      padding: 100px 0;
+      text-align: center;
+    }
+    
+    .cta h2 {
+      font-size: 2.8rem;
+      margin-bottom: 30px;
+    }
+    
+    .cta p {
+      max-width: 700px;
+      margin: 0 auto 40px;
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+    
+    /* Footer */
+    footer {
+      background: var(--darker);
+      padding: 50px 0 20px;
+      text-align: center;
+    }
+    
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+    
+    .footer-column h3 {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      position: relative;
+      display: inline-block;
+    }
+    
+    .footer-column h3:after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 50px;
+      height: 2px;
+      background: var(--accent);
+    }
+    
+    .footer-column ul {
+      list-style: none;
+    }
+    
+    .footer-column ul li {
+      margin-bottom: 12px;
+    }
+    
+    .footer-column a {
+      text-decoration: none;
+      color: var(--light);
+      opacity: 0.7;
+      transition: var(--transition);
+    }
+    
+    .footer-column a:hover {
+      opacity: 1;
+      color: var(--accent);
+    }
+    
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 20px;
+    }
+    
+    .social-icons a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.05);
+      font-size: 1.2rem;
+      transition: var(--transition);
+    }
+    
+    .social-icons a:hover {
+      background: var(--accent);
+      transform: translateY(-5px);
+    }
+    
+    .copyright {
+      opacity: 0.7;
+      font-size: 0.9rem;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 3rem;
+      }
+      
+      nav ul {
+        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      
+      .hero-content {
+        padding: 0 20px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <!-- Cinematic Intro Section -->
-    <section class="cinematic-intro" id="cinematic-intro">
-        <div class="cinematic-content">
-            <h1>Nexus Portfolio</h1>
-            <p>Experience the future of design through our cinematic portfolio showcase. Innovative solutions for a digital world.</p>
-            <button class="btn" id="enter-btn">Enter Portfolio</button>
-        </div>
-    </section>
-
-    <!-- Main Content -->
-    <div class="main-content">
-        <header>
-            <div class="logo">NEXUS</div>
-            <nav>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#portfolio">Portfolio</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
-        </header>
-
-        <section class="hero">
-            <div class="hero-content">
-                <h1>Designing Tomorrow's Digital Experiences</h1>
-                <p>We create immersive digital experiences that blend cutting-edge technology with artistic vision. Our portfolio showcases the future of interface design through a cinematic lens.</p>
-                <button class="btn">Explore Projects</button>
-            </div>
-            <div class="hero-image">
-                <div class="glow"></div>
-            </div>
-        </section>
-
-        <section class="features">
-            <div class="feature-card">
-                <i class="fas fa-cube"></i>
-                <h3>Futuristic Design</h3>
-                <p>Creating interfaces that feel like they're from the future with innovative layouts and interactive elements that push boundaries.</p>
-            </div>
-            <div class="feature-card">
-                <i class="fas fa-paint-brush"></i>
-                <h3>Cinematic Experience</h3>
-                <p>Every interaction tells a story. We craft digital experiences with narrative depth and visual storytelling.</p>
-            </div>
-            <div class="feature-card">
-                <i class="fas fa-code"></i>
-                <h3>Immersive Technology</h3>
-                <p>Utilizing the latest web technologies to create seamless, engaging experiences that captivate users.</p>
-            </div>
-        </section>
-
-        <section class="portfolio-grid">
-            <div class="portfolio-item">
-                <div class="overlay">
-                    <h3>Quantum Interface</h3>
-                    <p>Next-gen UI design system</p>
-                </div>
-            </div>
-            <div class="portfolio-item">
-                <div class="overlay">
-                    <h3>Neural Network Dashboard</h3>
-                    <p>AI-powered analytics platform</p>
-                </div>
-            </div>
-            <div class="portfolio-item">
-                <div class="overlay">
-                    <h3>Holographic Display</h3>
-                    <p>3D interactive visualization</p>
-                </div>
-            </div>
-        </section>
-
-        <footer>
-            <p>© 2023 Nexus Portfolio. All rights reserved.</p>
-            <p>Designing the future, one pixel at a time.</p>
-        </footer>
+  <!-- Header -->
+  <header>
+    <div class="container header-container">
+      <div class="logo">SCIEO VLOGS</div>
+      <nav>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Portfolio</a></li>
+          <li><a href="#">Services</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#" class="btn">Contact</a></li>
+        </ul>
+      </nav>
     </div>
+  </header>
 
-    <script>
-        // Cinematic intro functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            const intro = document.getElementById('cinematic-intro');
-            const enterBtn = document.getElementById('enter-btn');
-            
-            if (enterBtn) {
-                enterBtn.addEventListener('click', function() {
-                    intro.classList.add('hidden');
-                    setTimeout(() => {
-                        intro.style.display = 'none';
-                    }, 1000);
-                });
-            }
-            
-            // Add scroll animation for feature cards
-            const featureCards = document.querySelectorAll('.feature-card');
-            featureCards.forEach(card => {
-                card.addEventListener('mouseenter', () => {
-                    card.style.boxShadow = '0 0 20px rgba(255, 0, 60, 0.5)';
-                });
-                
-                card.addEventListener('mouseleave', () => {
-                    card.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.3)';
-                });
-            });
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Cinematic Storytelling</h1>
+      <p>Transforming moments into timeless visual narratives that captivate audiences and elevate brands through the power of cinematic excellence.</p>
+      <div>
+        <a href="#" class="btn">View Portfolio</a>
+        <a href="#" class="btn btn-secondary">Our Process</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="stats">
+    <div class="container">
+      <h2>Our Cinematic Impact</h2>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <h3>150+</h3>
+          <p>Projects Completed</p>
+        </div>
+        <div class="stat-card">
+          <h3>98%</h3>
+          <p>Client Satisfaction</p>
+        </div>
+        <div class="stat-card">
+          <h3>25M+</h3>
+          <p>Views Generated</p>
+        </div>
+        <div class="stat-card">
+          <h3>50+</h3>
+          <p>Awards Won</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features">
+    <div class="container">
+      <div class="section-title">
+        <h2>Our Cinematic Services</h2>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-video"></i>
+          </div>
+          <h3>Visual Storytelling</h3>
+          <p>We craft compelling narratives that resonate with audiences and leave lasting impressions through cinematic excellence.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-film"></i>
+          </div>
+          <h3>Production Quality</h3>
+          <p>Hollywood-grade production values with attention to every detail for maximum visual impact.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-camera-movie"></i>
+          </div>
+          <h3>Creative Direction</h3>
+          <p>Conceptualizing and executing unique visual concepts that set you apart from the competition.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="testimonials">
+    <div class="container">
+      <div class="section-title">
+        <h2>Client Testimonials</h2>
+      </div>
+      <div class="testimonial-grid">
+        <div class="testimonial-card">
+          <p>"Working with Scieo Vlogs transformed our brand story. Their cinematic approach elevated our message to a whole new level."</p>
+          <div class="client">
+            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Client">
+            <div class="client-info">
+              <h4>Sarah Johnson</h4>
+              <p>Marketing Director, TechVision</p>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <p>"The visual storytelling expertise they brought to our product launch video resulted in 300% more engagement than our previous campaigns."</p>
+          <div class="client">
+            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Client">
+            <div class="client-info">
+              <h4>Michael Torres</h4>
+              <p>CEO, InnovateX</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta">
+    <div class="container">
+      <h2>Ready to Elevate Your Visual Story?</h2>
+      <p>Partner with us to create cinematic content that captures attention, tells your story, and drives results. Let's create something extraordinary together.</p>
+      <a href="#" class="btn">Start Your Project</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-column">
+          <h3>Scieo Vlogs</h3>
+          <p>Crafting cinematic experiences that transcend expectations and deliver measurable results through visual storytelling excellence.</p>
+          <div class="social-icons">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+            <a href="#"><i class="fab fa-vimeo"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h3>Navigation</h3>
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Portfolio</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Services</h3>
+          <ul>
+            <li><a href="#">Corporate Videos</a></li>
+            <li><a href="#">Brand Commercials</a></li>
+            <li><a href="#">Event Coverage</a></li>
+            <li><a href="#">Social Media Content</a></li>
+            <li><a href="#">Documentary Production</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="copyright">
+        <p>&copy; 2023 SCIEO VLOGS. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Header scroll effect
+    window.addEventListener('scroll', function() {
+      const header = document.querySelector('header');
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+    
+    // Add animation classes on scroll
+    document.addEventListener('DOMContentLoaded', function() {
+      // Add subtle animations to elements
+      const featureCards = document.querySelectorAll('.feature-card, .stat-card, .testimonial-card');
+      featureCards.forEach(card => {
+        card.style.opacity = "0";
+        card.style.transform = "translateY(20px)";
+        card.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+      });
+      
+      // Trigger animations when in view
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = "1";
+            entry.target.style.transform = "translateY(0)";
+          }
         });
-    </script>
+      }, { threshold: 0.1 });
+      
+      setTimeout(() => {
+        featureCards.forEach(card => {
+          observer.observe(card);
+        });
+      }, 300);
+    });
+  </script>
 </body>
 </html>
